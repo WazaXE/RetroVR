@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class TeleportPlayer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Transform teleportDestination;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            if (teleportDestination != null)
+            {
+                other.transform.position = teleportDestination.position;
+                Debug.Log($"Player teleported to {teleportDestination.position}");
+            }else
+            {
+                Debug.LogWarning("Teleport destination is not set!");
+            }
+        }
     }
 }
